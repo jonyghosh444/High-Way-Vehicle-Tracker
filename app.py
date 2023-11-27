@@ -90,15 +90,21 @@ cv2.setMouseCallback('VideoFrame', mouse_callback)
 # Create a video capture object (replace 'your_video.mp4' with your video file)
 cap = cv2.VideoCapture('Data/video.mp4')
 
+count = 0
+
 while True:
     # print(f"Vehicle count: {vehicle_count}")
     # Capture a frame from the video
     ret, frame = cap.read()
-
+    count+=1
     # Check if the frame is successfully captured
     if not ret:
         print("Failed to capture frame. End of video?")
         break
+    
+    # 10 frame (skiping frame)
+    if count % 3 !=0:
+        continue
 
     # Detect objects on frame
     res = model(frame)
