@@ -2,7 +2,13 @@ import cv2
 import numpy as np
 import torch
 
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+print(f"Your device is: ",device)
+
 model = torch.hub.load('/home/hb/Desktop/dynamic/yolov5', 'custom', path='/home/hb/Desktop/dynamic/yolov5/yolov5s.pt', source='local')  # PyTorch
+
+model = model.to(device)
 
 # Global variables to store the line coordinates
 line_start = (-1, -1)
